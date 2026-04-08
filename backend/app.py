@@ -12,12 +12,15 @@ def create_app():
     app.config.from_object(Config)
 
     # CORS(app)
-    CORS(app,
-        resources={r"/*": {"origins": "http://localhost:1717", "http://taskly-indol-tau.vercel.app"}},
-        supports_credentials=True,
-        allow_headers=["Content-Type", "Authorization"],
-        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-    )
+   CORS(app,
+    resources={r"/*": {"origins": [
+        "http://localhost:1717",
+        "https://taskly-indol-tau.vercel.app"
+    ]}},
+    supports_credentials=True,
+    allow_headers=["Content-Type", "Authorization"],
+    methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+)
     db.init_app(app)
     jwt.init_app(app)
     migrate.init_app(app, db)
@@ -27,8 +30,6 @@ def create_app():
 
 app = create_app()
 
-
-import os
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 1616))
