@@ -13,7 +13,7 @@ def create_app():
 
     # CORS(app)
     CORS(app,
-        resources={r"/*": {"origins": "http://localhost:1717"}},
+        resources={r"/*": {"origins": "http://localhost:1717", "http://taskly-indol-tau.vercel.app"}},
         supports_credentials=True,
         allow_headers=["Content-Type", "Authorization"],
         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
