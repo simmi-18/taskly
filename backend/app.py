@@ -4,7 +4,7 @@ from flask_cors import CORS
 from config import Config
 from routes import register_routes
 from flask_migrate import Migrate
-
+import os
 
 migrate = Migrate()
 def create_app():
@@ -28,7 +28,8 @@ def create_app():
 app = create_app()
 
 
-if __name__ == "__main__": 
-    with app.app_context():
-        db.create_all()
-    app.run(port=1616, debug=True)
+import os
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 1616))
+    app.run(host="0.0.0.0", port=port)
